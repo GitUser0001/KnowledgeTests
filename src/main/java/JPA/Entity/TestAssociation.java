@@ -21,7 +21,7 @@ public class TestAssociation {
     private int mark;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "userID", referencedColumnName = "id")
+    @PrimaryKeyJoinColumn(name = "appuserID", referencedColumnName = "id")
     private User user;
 
     @ManyToOne

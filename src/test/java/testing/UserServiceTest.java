@@ -29,6 +29,9 @@ public class UserServiceTest {
 
         //Вывели записанную в БД запись
         System.out.println(user);
+
+
+        service.delete(user.getId());
     }
 
     @Test
@@ -64,6 +67,8 @@ public class UserServiceTest {
         //Получние с БД Citroen‎
         User userFromDB = service.get(user.getId());
         System.out.println(userFromDB);
+
+        service.delete(userFromDB.getId());
     }
 
     @Test
@@ -87,6 +92,8 @@ public class UserServiceTest {
         //Получаем обновленую запись
         User user2 = service.get(user1.getId());
         System.out.println(user2);
+
+        service.delete(user2.getId());
     }
 
     public void testGetAll(){
@@ -125,6 +132,7 @@ public class UserServiceTest {
         //Выводим полученый список авто
         for(User u : users){
             System.out.println(u);
+            service.delete(u.getId());
         }
     }
 }

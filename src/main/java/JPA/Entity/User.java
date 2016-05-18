@@ -6,8 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "appuser")
 @NamedQuery(name = "User.getAll", query = "SELECT u FROM  User u")
+
 public class User {
 
     @Id
