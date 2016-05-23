@@ -15,8 +15,10 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
 
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
 
-            <property name="connection_pool_size" value="1"/>
+            <!--<property name="connection_pool_size" value="1"/> -->
         </properties>
     </persistence-unit>
 </persistence>

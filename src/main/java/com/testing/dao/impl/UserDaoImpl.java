@@ -20,7 +20,11 @@ import java.util.List;
 @SessionScoped
 public class UserDaoImpl implements IUserDao, Serializable {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();
+    private EntityManager em;
+
+    public UserDaoImpl() {
+        this.em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();;
+    }
 
     public User add(User item) {
         em.getTransaction().begin();
