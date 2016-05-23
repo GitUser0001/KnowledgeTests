@@ -1,19 +1,25 @@
-package JPA.Crud;
+package com.testing.dao.impl;
 
-import JPA.Entity.Test;
-import JPA.Services.ITestService;
+import com.testing.model.Test;
+import com.testing.dao.ITestDao;
+import org.springframework.stereotype.Repository;
 
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Study on 17.05.2016.
  */
-public class TestService implements ITestService {
 
-    public EntityManager em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();
+@Repository
+@SessionScoped
+public class TestDaoImpl implements ITestDao, Serializable {
+
+    private EntityManager em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();
 
     public Test add(Test item) {
         em.getTransaction().begin();

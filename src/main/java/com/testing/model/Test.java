@@ -1,4 +1,6 @@
-package JPA.Entity;
+package com.testing.model;
+
+import com.testing.model.helpers.TestAssociation;
 
 import javax.persistence.*;
 
@@ -22,7 +24,7 @@ public class Test {
     private String name;
 
     @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL)
-    private Set<Question> questions = new HashSet<Question>();
+    private Set<Question> questions = new HashSet<>();
 
     @OneToMany(mappedBy = "test")
     private List<TestAssociation> users;

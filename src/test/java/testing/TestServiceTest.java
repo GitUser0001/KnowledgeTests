@@ -1,6 +1,6 @@
 package testing;
 
-import JPA.Crud.TestService;
+import com.testing.dao.impl.TestDaoImpl;
 import org.junit.Test;
 
 
@@ -8,15 +8,16 @@ import org.junit.Test;
  * Created by Study on 18.05.2016.
  */
 public class TestServiceTest {
-    TestService service = new TestService();
+
+    private TestDaoImpl service = new TestDaoImpl();
 
     @Test
     public void testSaveRecord() throws Exception {
         //Создаем автомобиль для записи в БД
-        JPA.Entity.Test test = new JPA.Entity.Test();
+        com.testing.model.Test test = new com.testing.model.Test();
         test.setName("llaaa1");
         //Записали в БД
-        JPA.Entity.Test test1 = service.add(test);
+        com.testing.model.Test test1 = service.add(test);
 
         //Вывели записанную в БД запись
         System.out.println(test1);

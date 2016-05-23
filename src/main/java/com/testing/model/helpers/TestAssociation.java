@@ -1,5 +1,8 @@
-package JPA.Entity;
+package com.testing.model.helpers;
 
+
+import com.testing.model.Test;
+import com.testing.model.User;
 
 import javax.persistence.*;
 import java.util.Date;

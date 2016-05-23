@@ -6,10 +6,10 @@
              version="1.0">
 
     <persistence-unit name="PostgreSQL" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://10.37.129.3:5432/KnowledgeTestsDB"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://192.168.0.104:5432/KnowledgeTestsDB"/>
             <property name="hibernate.connection.username" value="postgres"/>
             <property name="hibernate.connection.password" value="1"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>

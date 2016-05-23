@@ -1,4 +1,4 @@
-package JPA.Entity;
+package com.testing.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -1,18 +1,17 @@
 package testing;
 
-import JPA.Crud.TestService;
-import JPA.Crud.UserService;
-import JPA.Entity.User;
+import com.testing.dao.impl.UserDaoImpl;
+import com.testing.model.User;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Study on 17.05.2016.
  */
 public class UserServiceTest {
-    UserService service = new UserService();
+
+    private UserDaoImpl service = new UserDaoImpl();
 
     @Test
     public void testSaveRecord() throws Exception {

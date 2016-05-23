@@ -1,13 +1,21 @@
-package JPA.Entity;
+package com.testing.model;
 
+
+import com.testing.model.helpers.TestAssociation;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 
 @Entity
 @Table(name = "appuser")
-@NamedQuery(name = "User.getAll", query = "SELECT u FROM  User u")
+@NamedQueries({
+        @NamedQuery(name = "User.getAll", query = "SELECT u FROM  User u"),
+        @NamedQuery(name = "User.findUser", query = "SELECT u FROM User u WHERE nick = :nickName AND password = :password"),
+        @NamedQuery(name = "User.findUserByNickName", query = "SELECT u FROM User u WHERE nick = :nickName")
+})
+
 
 public class User {
 
@@ -54,12 +62,12 @@ public class User {
 
     public User(){}
 
-    public User(String nick, String firstName, String lastName, String password, boolean isAdmin) {
+    public User(String nick, String firstName, String lastName, String password, String secret) {
         this.nick = nick;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.isAdmin = isAdmin;
+        this.isAdmin = secret.equals("123");
     }
 
     public int getId() {
