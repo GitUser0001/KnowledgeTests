@@ -22,12 +22,12 @@ public class UserService {
         return (userDao.get(nickName, password) != null);
     }
 
-    public boolean Register(String nickName, String pass, String firstName, String lastName, String secret) {
+    public boolean Register(String nickName, String pass, String firstName, String lastName) {
 
         if (userDao.get(nickName) != null)
             return false;
 
-        User user = new User(nickName, firstName, lastName, pass, secret);
+        User user = new User(nickName, firstName, lastName, pass);
 
         userDao.add(user);
         return true;

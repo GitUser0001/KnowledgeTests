@@ -36,8 +36,13 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "isAdmin")
-    private boolean isAdmin;
+    @ManyToMany
+    @JoinTable(
+            name = "user_in_group",
+            joinColumns = @JoinColumn(name = "appuser", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "appgroup", referencedColumnName = "id"))
+    private List<Group> groups;
+
 
     @OneToMany(mappedBy = "user")
     private List<TestAssociation> tests;
@@ -62,12 +67,11 @@ public class User {
 
     public User(){}
 
-    public User(String nick, String firstName, String lastName, String password, String secret) {
+    public User(String nick, String firstName, String lastName, String password) {
         this.nick = nick;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.isAdmin = secret.equals("123");
     }
 
     public int getId() {
@@ -106,20 +110,20 @@ public class User {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
     public List<TestAssociation> getTests() {
         return tests;
     }
 
     public void setTests(List<TestAssociation> tests) {
         this.tests = tests;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
     }
 
     @Override
@@ -130,7 +134,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
-                ", isAdmin=" + isAdmin +
                 '}';
     }
 }

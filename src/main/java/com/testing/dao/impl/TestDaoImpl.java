@@ -19,11 +19,9 @@ import java.util.List;
 @SessionScoped
 public class TestDaoImpl implements ITestDao, Serializable {
 
-    private EntityManager em;
+    private EntityManager em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();
 
-    public TestDaoImpl() {
-        this.em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();
-    }
+    public TestDaoImpl() {  }
 
     public Test add(Test item) {
         em.getTransaction().begin();

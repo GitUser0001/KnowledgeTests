@@ -23,6 +23,9 @@ public class Test {
     @Column(name = "name", unique = true)
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL)
     private Set<Question> questions = new HashSet<>();
 
@@ -32,8 +35,9 @@ public class Test {
 
     public Test(){}
 
-    public Test(String name, Set<Question> questions, List<TestAssociation> users) {
+    public Test(String name, String description, Set<Question> questions, List<TestAssociation> users) {
         this.name = name;
+        this.description = description;
         this.questions = questions;
         this.users = users;
     }
@@ -48,6 +52,14 @@ public class Test {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Question> getQuestions() {

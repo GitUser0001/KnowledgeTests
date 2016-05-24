@@ -17,7 +17,7 @@ public class Question{
 
     @Column(name = "name")
     private String name;
-    @Column(name = "answers", nullable = false)
+    @Column(name = "answers", nullable = false, length = 700)
     private String answers;
     @Column(name = "answerNumber")
     private int correctAnswer;
