@@ -1,5 +1,7 @@
 package com.testing.model;
 
+import com.testing.model.enums.UserRoleEnum;
+
 import javax.persistence.*;
 
 /**
@@ -21,21 +23,22 @@ public class Group {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name", unique = true)
-    private String name;
+    @Column(name = "name")
+    @Enumerated(EnumType.STRING)
+    private UserRoleEnum nameRole;
 
     public Group(){}
 
-    public Group(String name) {
-        this.name = name;
+    public Group(UserRoleEnum nameRole) {
+        this.nameRole = nameRole;
     }
 
-    public String getName() {
-        return name;
+    public UserRoleEnum getNameRole() {
+        return nameRole;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameRole(UserRoleEnum nameRole) {
+        this.nameRole = nameRole;
     }
 
     public int getId() {

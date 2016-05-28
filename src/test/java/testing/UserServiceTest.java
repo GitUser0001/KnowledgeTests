@@ -4,6 +4,7 @@ import com.testing.dao.impl.GroupDaoImpl;
 import com.testing.dao.impl.UserDaoImpl;
 import com.testing.model.Group;
 import com.testing.model.User;
+import com.testing.model.enums.UserRoleEnum;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class UserServiceTest {
         user1.setNick("testTest");
         user1.setPassword("13");
 
-        Group studentGroup = new Group("studentTest");
+        Group studentGroup = new Group(UserRoleEnum.USER);
         GroupDaoImpl groupService = new GroupDaoImpl();
         studentGroup = groupService.add(studentGroup);
 

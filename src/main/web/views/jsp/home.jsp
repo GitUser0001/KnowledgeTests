@@ -5,8 +5,9 @@
   Time: 11:33
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html>
 <head>
   <meta charset="utf-8">
@@ -19,7 +20,7 @@
   <title>Justified Nav Template for Bootstrap</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="resources/home/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://bootstrap-3.ru/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="http://bootstrap-3.ru/examples/justified-nav/justified-nav.css" rel="stylesheet">
@@ -590,13 +591,21 @@
       <li><a href="#">...</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
+      <sec:authorize access="!isAuthenticated()">
+        <li><a href="account/login">Login</a></li>
+      </sec:authorize>
+      <sec:authorize access="isAuthenticated()">
+        <li><a href="#">Hi <sec:authentication property="principal.username" /> !</a></li>
+        <li><a href="account/logout">Logout</a></li>
+      </sec:authorize>
     </ul>
   </div>
 
   <!-- Jumbotron -->
   <div class="jumbotron">
     <h1>Hi there!</h1>
-    <p class="lead">Press green button to see your results!\n Good luck!</p>
+    <p class="lead">Press green button to see your results!</p>
+    <p class="lead">Good luck!</p>
     <p><a class="btn btn-lg btn-success" href="#" role="button">Get results</a></p>
   </div>
 

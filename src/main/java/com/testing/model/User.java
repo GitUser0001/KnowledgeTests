@@ -2,11 +2,11 @@ package com.testing.model;
 
 
 import com.testing.model.helpers.TestAssociation;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.StringJoiner;
+import java.util.*;
 
 @Entity
 @Table(name = "appuser")
@@ -124,6 +124,16 @@ public class User {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+
+    public Set<GrantedAuthority> getRolesGrantedAuthority() {
+        Set<GrantedAuthority> roles = new HashSet();
+
+        for (Group group : groups) {
+            roles.add(new SimpleGrantedAuthority(group.getNameRole().name()));
+        }
+
+        return roles;
     }
 
     @Override

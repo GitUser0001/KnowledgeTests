@@ -2,13 +2,23 @@ package com.testing.service;
 
 import com.testing.dao.impl.UserDaoImpl;
 import com.testing.model.User;
+import com.testing.model.enums.UserRoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Study on 22.05.2016.
  */
-@Component
+@Service
 public class UserService {
 
     @Autowired

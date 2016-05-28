@@ -4,13 +4,14 @@ import com.testing.dao.impl.TestDaoImpl;
 import com.testing.model.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Study on 22.05.2016.
  */
-@Component
+@Service
 public class TestService {
 
     @Autowired
