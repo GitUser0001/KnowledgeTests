@@ -9,11 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-    // Start page
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView handleRequestStart() throws Exception {
         ModelAndView model = new ModelAndView();
-        model.setViewName("../index");
+        model.setViewName("home");
 
         return model;
     }

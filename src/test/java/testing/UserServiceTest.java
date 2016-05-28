@@ -1,9 +1,13 @@
 package testing;
 
+import com.testing.dao.impl.GroupDaoImpl;
 import com.testing.dao.impl.UserDaoImpl;
+import com.testing.model.Group;
 import com.testing.model.User;
+import com.testing.model.enums.UserRoleEnum;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +17,48 @@ public class UserServiceTest {
 
     private UserDaoImpl service = new UserDaoImpl();
 
+
+    @Test
+    public void testUserGroup() throws Exception {
+        //Создаем автомобиль для записи в БД
+        User user1 = new User();
+        user1.setFirstName("Ivan");
+        user1.setLastName("Petrov");
+        user1.setNick("testTest");
+        user1.setPassword("13");
+
+        Group studentGroup = new Group(UserRoleEnum.USER);
+        GroupDaoImpl groupService = new GroupDaoImpl();
+        studentGroup = groupService.add(studentGroup);
+
+
+
+        //Записали в БД
+        //User user = service.add(user1);
+
+        List<Group> gr = new ArrayList<>();
+        gr.add(studentGroup);
+
+        user1.setGroups(gr);
+
+        user1 = service.add(user1);
+
+        //Вывели записанную в БД запись
+        System.out.println(user1);
+
+
+        service.delete(user1.getId());
+        groupService.delete(studentGroup.getId());
+    }
+
+
     @Test
     public void testSaveRecord() throws Exception {
         //Создаем автомобиль для записи в БД
         User user1 = new User();
-        user1.setAdmin(false);
         user1.setFirstName("Ivan");
         user1.setLastName("Petrov");
-        user1.setNick("test");
+        user1.setNick("testTest");
         user1.setPassword("123");
 
         //Записали в БД
@@ -37,7 +75,6 @@ public class UserServiceTest {
     public void testDeleteRecord() throws Exception {
         //Создаем автомобиль для записи в БД
         User user1 = new User();
-        user1.setAdmin(false);
         user1.setFirstName("Ivan");
         user1.setLastName("Petrov");
         user1.setNick("test1");
@@ -54,7 +91,6 @@ public class UserServiceTest {
     public void testSelect() throws Exception {
         //Создаем автомобиль для записи в БД
         User user1 = new User();
-        user1.setAdmin(false);
         user1.setFirstName("Ivan");
         user1.setLastName("Petrov");
         user1.setNick("test1");
@@ -74,7 +110,6 @@ public class UserServiceTest {
     public void testUpdate() throws Exception {
         //Создаем автомобиль для записи в БД
         User user1 = new User();
-        user1.setAdmin(false);
         user1.setFirstName("Ivan");
         user1.setLastName("Petrov");
         user1.setNick("test1");
@@ -98,7 +133,6 @@ public class UserServiceTest {
     public void testGetAll(){
         //Создаем автомобиль для записи в БД
         User user1 = new User();
-        user1.setAdmin(false);
         user1.setFirstName("Ivan");
         user1.setLastName("Petrov");
         user1.setNick("test1");
@@ -106,7 +140,6 @@ public class UserServiceTest {
 
         //Создаем автомобиль для записи в БД
         User user2 = new User();
-        user2.setAdmin(false);
         user2.setFirstName("Ivan");
         user2.setLastName("Petrov");
         user2.setNick("test1");
@@ -114,7 +147,6 @@ public class UserServiceTest {
 
         //Создаем автомобиль для записи в БД
         User user3 = new User();
-        user3.setAdmin(false);
         user3.setFirstName("Ivan");
         user3.setLastName("Petrov");
         user3.setNick("test1");
