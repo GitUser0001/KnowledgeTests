@@ -68,7 +68,7 @@ public class TestController {
         //boolean result = testService.addTest(testName, testDescription);
 
 
-        int correctAnswerNumber = -1;
+        int currectAnswerNumber = -1;
         ArrayList<String> answers = new ArrayList<>();
 
         try {
@@ -89,17 +89,20 @@ public class TestController {
 
                 if (isRight && !isOneAnswer) {
                     isOneAnswer = true;
-                    correctAnswerNumber = i;
+                    currectAnswerNumber = i;
                 } else if (isRight && isOneAnswer){
                     throw new Exception("Invalid Json");
                 }
             }
+
+            if (currectAnswerNumber == -1) throw new Exception("There is no answer in JSON");
+
         } catch (Exception e) {
             return "{\"error\":" + "bad JSON" + "}";
         }
 
 
-        Question question = new Question(questionName, answers, correctAnswerNumber);
+        Question question = new Question(questionName, answers, currectAnswerNumber);
 
         Test test = testService.getByName(testName);
         question = questionService.addQuestion(question);

@@ -18,10 +18,12 @@
 
     <script>
 
+        var ip = window.location.href.replace('http://','').split(':')[0];
+
         AJAX = {
             sendQuestion: function (question, callback) {
                 $.ajax({
-                    url : "http://localhost:8080/KnowledgeTests/test/addQuestion",
+                    url : "http://"+ ip +":8080/KnowledgeTests/test/addQuestion",
                     type: "POST",
                     data : question ,
                     success:function(data, textStatus, jqXHR)
@@ -41,7 +43,7 @@
 
             sendTestInfo: function (testData, callback) {
                 $.ajax({
-                    url : "http://localhost:8080/KnowledgeTests/test/addTest",
+                    url : "http://"+ ip +":8080/KnowledgeTests/test/addTest",
                     type: "POST",
                     data : testData,
                     success:function(data, textStatus, jqXHR)
@@ -91,11 +93,11 @@
 
                 if (question) {
                     AJAX.sendQuestion(question, function () {
-                        window.location = "http://localhost:8080/KnowledgeTests";
+                        window.location = "http://"+ ip +":8080/KnowledgeTests";
                     })
                 } else if (!confirm('do you want to save current item?')) {
                     if (questionNumber > 1){
-                        window.location = "http://localhost:8080/KnowledgeTests";
+                        window.location = "http://"+ ip +":8080/KnowledgeTests";
                     } else {
                         alert("there is no questions");
                     }
