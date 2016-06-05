@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
@@ -25,15 +26,23 @@ public class User {
     private int id;
 
     @Column(name = "nickName", unique = true, updatable = false)
+    @NotNull
+    //@NotEmpty
     private String nick;
 
     @Column(name = "firstName")
+    @NotNull
+    //@NotEmpty
     private String firstName;
 
     @Column(name = "lastName")
+    @NotNull
+    //@NotEmpty
     private String lastName;
 
     @Column(name = "password")
+    @NotNull
+    //@NotEmpty
     private String password;
 
     @ManyToMany

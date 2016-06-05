@@ -1,7 +1,11 @@
 package testing;
 
+import com.testing.dao.impl.QuestionDaoImpl;
 import com.testing.dao.impl.TestDaoImpl;
+import com.testing.model.Question;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 
 /**
@@ -10,6 +14,7 @@ import org.junit.Test;
 public class TestServiceTest {
 
     private TestDaoImpl service = new TestDaoImpl();
+    private QuestionDaoImpl questionService = new QuestionDaoImpl();
 
     @Test
     public void testSaveRecord() throws Exception {
@@ -23,6 +28,20 @@ public class TestServiceTest {
         System.out.println(test1);
 
         service.delete(test1.getId());
+    }
+
+    @Test
+    public void addQuestion() throws Exception {
+        com.testing.model.Test test = service.getTestByName("TEST 1");
+
+        Question question = new Question("name", new ArrayList<String>(){{add("aaa");add("ddd");}}, 1);
+
+        question = questionService.add(question);
+        test.addQuestion(question);
+        service.update(test);
+
+        test = service.getTestByName("TEST 1");
+        System.out.println(test.getQuestions().size());
     }
 
 }

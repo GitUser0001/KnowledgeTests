@@ -11,7 +11,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "test")
-@NamedQuery(name = "Test.getAll", query = "SELECT t FROM  Test t")
+@NamedQueries({
+        @NamedQuery(name = "Test.getAll", query = "SELECT t FROM  Test t"),
+        @NamedQuery(name = "Test.findTestByName", query = "SELECT t FROM Test t WHERE name = :name")
+})
+
 
 public class Test {
 
@@ -34,6 +38,11 @@ public class Test {
 
 
     public Test(){}
+
+    public Test(String name, String description){
+        this.name = name;
+        this.description = description;
+    }
 
     public Test(String name, String description, Set<Question> questions, List<TestAssociation> users) {
         this.name = name;
@@ -76,6 +85,10 @@ public class Test {
 
     public void setUsers(List<TestAssociation> users) {
         this.users = users;
+    }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
     }
 
     @Override

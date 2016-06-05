@@ -22,10 +22,11 @@ public class Question{
     @Column(name = "answerNumber")
     private int correctAnswer;
 
+    public Question(){}
 
-    public Question(String name, String answers, int correctAnswer) {
+    public Question(String name, ArrayList<String> answers, int correctAnswer) {
         this.name = name;
-        this.answers = answers;
+        setAnswers(answers);
         this.correctAnswer = correctAnswer;
     }
 
@@ -53,10 +54,10 @@ public class Question{
         return answers.split(";");
     }
 
-    public void setAnswers(String[] answers) {
+    public void setAnswers(ArrayList<String> answers) {
         this.answers = "";
-        for (int i = 0; i < answers.length; i++) {
-            this.answers += answers[i] + ";";
+        for (int i = 0; i < answers.size(); i++) {
+            this.answers += answers.get(i) + ";";
         }
     }
 
