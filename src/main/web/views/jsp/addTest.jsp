@@ -202,7 +202,7 @@
 
     <div class="container">
         <jsp:include page="dlc/manu.jsp">
-            <jsp:param name="test" value="active"/>
+            <jsp:param name="addTest" value="active"/>
         </jsp:include>
 
 

@@ -19,8 +19,12 @@
 <!-- Custom styles for this template -->
 <link href="http://bootstrap-3.ru/examples/justified-nav/justified-nav.css" rel="stylesheet">
 
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <!-- Just for debugging purposes. Don't actually copy this line! -->
 <script src="http://bootstrap-3.ru/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

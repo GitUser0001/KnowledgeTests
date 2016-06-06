@@ -25,30 +25,40 @@
 
 
 
+    <c:forEach var="testSet" items="${testsTripleSet}">
+
+        <div class="row" style="margin-top: 40px">
+
+        <c:forEach var="test" items="${testSet}">
+            <div class="col-lg-4">
+                <h2>${test.name}</h2>
+                <p>${test.description}</p>
+                <p>
+                    <a class="btn btn-primary" href="/KnowledgeTests/test/${test.getId()}/pass" role="button">Start the test »</a>
 
 
 
+                        <%--<sec:authorize ifAnyGranted="ADMIN">--%>
+                    <a class="btn btn-warning" href="#" role="button">Edit</a>
+                    <a class="btn btn-danger" href="#" role="button">Delete</a>
+                        <%--</sec:authorize>--%>
 
 
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-lg-4">
-            <h2>Safari bug warning!</h2>
-            <p class="text-danger">Some Test name 1</p>
-            <p>Some descriptions</p>
-            <p><a class="btn btn-primary" href="#" role="button">Start the test »</a></p>
+
+                </p>
+            </div>
+        </c:forEach>
+
         </div>
-        <div class="col-lg-4">
-            <h2>Some Test name 2</h2>
-            <p>Some descriptions</p>
-            <p><a class="btn btn-primary" href="#" role="button">Start the test »</a></p>
-        </div>
-        <div class="col-lg-4">
-            <h2>Some Test name 3</h2>
-            <p>Some descriptions</p>
-            <p><a class="btn btn-primary" href="#" role="button">Start the test »</a></p>
-        </div>
+
+    </c:forEach>
+
+    <!-- Example row of columns
+    <div class="row" style="margin-top: 40px">
+
     </div>
+    -->
+
 
     <!-- Site footer -->
     <div class="footer">

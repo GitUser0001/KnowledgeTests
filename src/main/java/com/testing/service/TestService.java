@@ -29,6 +29,8 @@ public class TestService {
         return true;
     }
 
+    public Test getById(int id) { return testDao.get(id); }
+
     public Test getByName(String name) { return testDao.getTestByName(name); }
 
     public void updateTest(Test test) {
@@ -40,6 +42,9 @@ public class TestService {
     }
 
     public List<Test> getAllTests() {
+
+
+
         return testDao.getAll();
     }
 }

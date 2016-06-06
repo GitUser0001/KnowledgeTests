@@ -56,19 +56,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<TestAssociation> tests;
 
-    public void addTest(Test test, Date date, int mark) {
-        TestAssociation association = new TestAssociation();
 
-        association.setUserId(this.getId());
-        association.setTestId(test.getId());
-        association.setMark(mark);
-        association.setPassedIn(date);
-        association.setUser(this);
-        association.setTest(test);
-
-        this.tests.add(association);
-        test.getUsers().add(association);
-    }
 
 
 
@@ -121,6 +109,10 @@ public class User {
 
     public List<TestAssociation> getTests() {
         return tests;
+    }
+
+    public void addTestAssociation(TestAssociation testAssociation) {
+        tests.add(testAssociation);
     }
 
     public void setTests(List<TestAssociation> tests) {

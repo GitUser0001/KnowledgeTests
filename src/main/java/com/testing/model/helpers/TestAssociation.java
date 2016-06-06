@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "testAssociation")
+@NamedQuery(name = "TestAssociation.getAll", query = "SELECT t FROM  TestAssociation t")
 @IdClass(TestAssociationId.class)
 public class TestAssociation {
 
