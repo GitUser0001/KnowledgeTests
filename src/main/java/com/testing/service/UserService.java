@@ -71,5 +71,6 @@ public class UserService {
     public void setTestMark(User user, Test test, Date date, int mark){
         TestAssociation testAssociation = testAssociationDao.getUserTest(test, user, date);
         testAssociation.setMark(mark);
+        testAssociationDao.update(testAssociation);
     }
 }
