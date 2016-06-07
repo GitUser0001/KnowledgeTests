@@ -55,6 +55,10 @@ public class Test {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -74,6 +78,8 @@ public class Test {
     public Set<Question> getQuestions() {
         return questions;
     }
+
+    public void addTestAssociation(TestAssociation testAssociation) { users.add(testAssociation); }
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;

@@ -1,23 +1,15 @@
 package com.testing.service;
 
-import com.testing.dao.impl.TestAssociationImpl;
+import com.testing.dao.impl.TestAssociationDaoImpl;
 import com.testing.dao.impl.UserDaoImpl;
 import com.testing.model.Test;
 import com.testing.model.User;
-import com.testing.model.enums.UserRoleEnum;
 import com.testing.model.helpers.TestAssociation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Study on 22.05.2016.
@@ -28,7 +20,7 @@ public class UserService {
     @Autowired
     private UserDaoImpl userDao;
     @Autowired
-    private TestAssociationImpl testAssociationDao;
+    private TestAssociationDaoImpl testAssociationDao;
 
 
     public void addUser(User user) {
@@ -54,25 +46,23 @@ public class UserService {
         return true;
     }
 
-    public void addTest(User user,Test test, Date date, int mark) {
+    public void addTest(User user, Test test, Date date) {
+
         TestAssociation association = new TestAssociation();
 
-        association.setUserId(user.getId());
-        association.setTestId(test.getId());
-        association.setMark(mark);
+        association.setMark(-1);
         association.setPassedIn(date);
-
         association.setUser(user);
         association.setTest(test);
 
-        association = new TestAssociationImpl().add(association);
-
-
+        association = testAssociationDao.add(association);
 
         user.addTestAssociation(association);
+        test.addTestAssociation(association);
+    }
 
-
-
-        test.getUsers().add(association);
+    public void setTestMark(User user, Test test, Date date, int mark){
+        TestAssociation testAssociation = testAssociationDao.getUserTest(test, user, date);
+        testAssociation.setMark(mark);
     }
 }

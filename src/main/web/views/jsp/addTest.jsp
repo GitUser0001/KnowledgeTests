@@ -20,7 +20,7 @@
 
         var ip = window.location.href.replace('http://','').split(':')[0];
 
-        AJAX = {
+        var AJAX = {
             sendQuestion: function (question, callback) {
                 $.ajax({
                     url : "http://"+ ip +":8080/KnowledgeTests/test/addQuestion",
@@ -83,7 +83,8 @@
               if (question){
                   AJAX.sendQuestion(question, function () {
                       $("#divQuestionForm").empty();
-                      createOrClearQuestionForm();
+                      createOrClearQuestionForm(questionNumber);
+                      questionNumber++;
                   })
               }
           });
@@ -245,3 +246,8 @@
 
 </body>
 </html>
+
+
+
+
+

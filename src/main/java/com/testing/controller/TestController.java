@@ -1,8 +1,10 @@
 package com.testing.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.testing.model.Question;
 import com.testing.model.Test;
 import com.testing.model.User;
@@ -14,18 +16,23 @@ import jdk.nashorn.internal.codegen.types.BooleanType;
 import jdk.nashorn.internal.objects.Global;
 import jdk.nashorn.internal.parser.JSONParser;
 
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -56,7 +63,7 @@ public class TestController {
 
 
 
-    @RequestMapping(value = "/addTest", method = RequestMethod.POST , produces = "application/json")
+    @RequestMapping(value = "/addTest", method = RequestMethod.POST , produces = "application/json; charset=\"utf-8\"")
     @ResponseBody
     public String handleRequestAddTestToDB(
             @RequestParam(value = "testName") String testName,
@@ -74,7 +81,7 @@ public class TestController {
 
 
 
-    @RequestMapping(value = "/addQuestion", method = RequestMethod.POST , produces = "application/json")
+    @RequestMapping(value = "/addQuestion", method = RequestMethod.POST , produces = "application/json; charset=\"utf-8\"")
     @ResponseBody
     public String handleRequestAddQuestionToDB(
             @RequestParam(value = "testName") String testName,
@@ -162,21 +169,147 @@ public class TestController {
 
 
 
+
+    @RequestMapping(value = "/{testId}/questions", method = RequestMethod.POST, produces = "application/json; charset=\"utf-8\"")
+    @ResponseBody
+    public String handleRequestStartTest(@PathVariable("testId") int id){
+
+        Test test = testService.getById(id);
+
+        if (test != null) {
+            JsonArray questionsJsonArray = new JsonArray();
+
+            for (Question question : test.getQuestions()){
+
+                JsonObject questionJsonObject = new JsonObject();
+                questionJsonObject.addProperty("name", question.getName());
+
+
+                JsonArray answersJsonArray = new JsonArray();
+                for (String answer : question.getAnswers()){
+                    answersJsonArray.add(answer);
+                }
+
+                questionJsonObject.add("answers", answersJsonArray);
+
+                questionsJsonArray.add(questionJsonObject);
+            }
+
+
+            String userNick = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = userService.getByNick(userNick);
+            Date dateStart = new Date();
+            userService.addTest(user, test, dateStart);
+
+
+            JsonObject result = new JsonObject();
+
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String reportDate = df.format(dateStart);
+
+
+            result.addProperty("start", reportDate);
+            result.add("questions", questionsJsonArray);
+
+            //String jsonString = new Gson().toJson(result);
+            //byte[] utf8JsonString = jsonString.getBytes("UTF8");
+            //responseToClient.write(utf8JsonString, 0, utf8JsonString.Length);
+
+
+            return result.toString();
+        }
+
+        return null;
+    }
+
+
     @RequestMapping(value = "/{testId}/pass", method = RequestMethod.GET)
-    public ModelAndView updateMovie(@PathVariable("testId") int id){
+    public ModelAndView handleRequestTest(@PathVariable("testId") int id){
 
         ModelAndView model = new ModelAndView("passTest");
         Test test = testService.getById(id);
 
-        String userNick = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.getByNick(userNick);
-
-        userService.addTest(user, test, new Date(), -1);
-
-        userService.updateUser(user);
-
-
         model.addObject("test", test);
+
         return model;
     }
+
+    @RequestMapping(value = "/{testId}/pass", method = RequestMethod.POST, produces = "application/json; charset=\"utf-8\"")
+    @ResponseBody
+    public String passTest(@PathVariable("testId") int id,
+                           @RequestParam(value = "dateTime") String dateTime,
+                           @RequestParam(value = "usersAnswers") String usersAnswers){
+
+
+        try {
+
+            Test test = testService.getById(id);
+
+            Gson gson = new Gson();
+            Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
+            Map<String,String> map = gson.fromJson(usersAnswers, stringStringMap);
+
+            int correctAnswers = 0;
+
+            for(Question question : test.getQuestions()) {
+                if(question.isCorrect(map.get(question.getName()))){
+                    correctAnswers++;
+                }
+            }
+
+            int mark = (correctAnswers > 0) ? correctAnswers*100/test.getQuestions().size() : 0;
+
+            String userNick = SecurityContextHolder.getContext().getAuthentication().getName();
+            User user = userService.getByNick(userNick);
+            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(dateTime);
+
+            userService.setTestMark(user,test, date, mark);
+
+            return "{\"mark\":" + mark + "}";
+
+
+        } catch (Exception e) {
+            return null;
+        }
+
+
+    }
+
+
+    @RequestMapping(value = "/{testId}/edit", method = RequestMethod.GET)
+    public ModelAndView handleRequestTestEdit(@PathVariable("testId") int id){
+
+        ModelAndView model = new ModelAndView("editTest");
+        Test test = testService.getById(id);
+
+        model.addObject("test", test);
+
+        return model;
+    }
+
+    @RequestMapping(value = "/{testId}/edit", method = RequestMethod.POST)
+    public String testEdit(@ModelAttribute("test") @Validated Test test, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "redirect:/error";
+        }
+        else {
+            testService.updateTest(test);
+
+            return "redirect:/test/all";
+        }
+
+    }
+
+
+
+    @RequestMapping(value = "/{testId}/delete", method = RequestMethod.GET)
+    public String handleRequestTestDelete(@PathVariable("testId") int id){
+
+        testService.deleteTest(id);
+
+        return "redirect:/test/all";
+    }
+
+
 }

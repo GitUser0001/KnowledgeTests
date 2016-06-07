@@ -38,10 +38,10 @@
 
 
 
-                        <%--<sec:authorize ifAnyGranted="ADMIN">--%>
-                    <a class="btn btn-warning" href="#" role="button">Edit</a>
-                    <a class="btn btn-danger" href="#" role="button">Delete</a>
-                        <%--</sec:authorize>--%>
+                        <sec:authorize ifAnyGranted="ADMIN">
+                    <a class="btn btn-warning" href="/KnowledgeTests/test/${test.getId()}/edit" role="button">Edit</a>
+                    <a class="btn btn-danger" href="/KnowledgeTests/test/${test.getId()}/delete" role="button">Delete</a>
+                        </sec:authorize>
 
 
 

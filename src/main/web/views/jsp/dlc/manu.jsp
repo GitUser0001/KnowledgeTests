@@ -18,14 +18,14 @@
 
 
 
-            <%--<sec:authorize ifAnyGranted="ADMIN">--%>
+            <sec:authorize ifAnyGranted="ADMIN">
                 <li class="${param.getOrDefault("addTest","")}"><a href="/KnowledgeTests/test/addTest">Add tests</a></li>
-            <%--</sec:authorize>--%>
+            </sec:authorize>
 
 
 
 
-            <li class="${param.getOrDefault("user","")}"><a href="#">Users</a></li>
+            <li class="${param.getOrDefault("user","")}"><a href="/KnowledgeTests/user/results">User</a></li>
             <li class="${param.getOrDefault("...","")}"><a href="#">...</a></li>
             <li class="${param.getOrDefault("about","")}"><a href="#">About</a></li>
             <li class="${param.getOrDefault("contact","")}"><a href="#">Contact</a></li>

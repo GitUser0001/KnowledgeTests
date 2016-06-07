@@ -41,14 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем правила запросов
                 // по которым будет определятся доступ к ресурсам и остальным данным
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/**").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("/resources/**", "/", "/account/registration", "/account/login").permitAll()
+                .anyRequest().authenticated()
                 .and();
+
 
         http.formLogin()
                 // указываем страницу с формой логина
-                .loginPage("/account/login")
                 .loginPage("/account/registration")
+                .loginPage("/account/login")
                 // указываем action с формы логина
                 .loginProcessingUrl("/j_spring_security_check")
                 // указываем URL при неудачном логине

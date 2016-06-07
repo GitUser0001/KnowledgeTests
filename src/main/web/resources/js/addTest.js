@@ -2,7 +2,7 @@ var counter = 3;
 var limit = 6;
 
 
-function createOrClearQuestionForm() {
+function createOrClearQuestionForm(questionNumber) {
     
     document.getElementById('divQuestionForm').children = null;
     
@@ -10,7 +10,7 @@ function createOrClearQuestionForm() {
 
     newDiv.innerHTML = "\<div>" +
                             "\<!--  Question     -   name \ answers   -->" +
-                            "\<label style=\"margin-top: 50px\" class=\"text-uppercase text-sm\">Question\</label>" +
+                            "\<label style=\"margin-top: 50px\" class=\"text-uppercase text-sm\">Question " + questionNumber + "\</label>" +
                             "\<!--  Question.Name ------------------------------------------------------------------ -->" +
                             "\<textarea id=\"nameQuestion\" rows=\"2\" name=\"name\" type=\"text\" class=\"form-control\" placeholder=\"Name\" required=\"\" autofocus=\"\">\</textarea>" +
                             "\<div class=\"row\" style=\"width: 100%\">" +
@@ -42,6 +42,7 @@ function createOrClearQuestionForm() {
                         "\<button id=\"confirmBtn\"         style=\"margin: 20px\" style=\"width: 25%\"  class=\"btn btn-lg btn-success\" type=\"button\">Confirm\</button>" + 
                         "\<button id=\"nextQuestionBtn\"    style=\"margin: 20px\" style=\"width: 30%\" class=\"btn btn-lg btn-warning\" type=\"button\">Next question\</button>" +
                         "\</div>";
+    
     
     document.getElementById('divQuestionForm').appendChild(newDiv);
 }

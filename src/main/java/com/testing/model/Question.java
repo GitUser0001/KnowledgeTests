@@ -46,8 +46,9 @@ public class Question{
         this.name = name;
     }
 
-    public boolean isCorrect(Integer answerNumber) {
-        return answerNumber.equals(correctAnswer);
+    public boolean isCorrect(String answer) {
+        boolean a = answer.equals(getAnswers()[correctAnswer]);
+        return answer.equals(getAnswers()[correctAnswer]);
     }
 
     public String[] getAnswers() {

@@ -28,9 +28,10 @@
     <h1>Hi there!</h1>
     <p class="lead">Press green button to see your results!</p>
     <p class="lead">Good luck!</p>
-    <p><a class="btn btn-lg btn-success" href="#" role="button">Get results</a></p>
+    <p><a class="btn btn-lg btn-success" href="/KnowledgeTests/user/results" role="button">Get results</a></p>
   </div>
 
+  <%--
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-lg-4">
@@ -50,6 +51,7 @@
       <p><a class="btn btn-primary" href="#" role="button">Start the test »</a></p>
     </div>
   </div>
+  --%>
 
   <!-- Site footer -->
   <div class="footer">
