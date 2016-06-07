@@ -2,7 +2,9 @@ package com.testing.dao.impl;
 
 import com.testing.dao.IGroupDao;
 import com.testing.model.Group;
+import org.springframework.stereotype.Repository;
 
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
@@ -11,6 +13,9 @@ import java.util.List;
 /**
  * Created by Study on 24.05.2016.
  */
+
+@Repository
+@SessionScoped
 public class GroupDaoImpl implements IGroupDao {
 
     private EntityManager em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();

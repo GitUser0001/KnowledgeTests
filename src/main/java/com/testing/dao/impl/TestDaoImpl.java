@@ -50,4 +50,15 @@ public class TestDaoImpl implements ITestDao, Serializable {
         TypedQuery<Test> namedQuery = em.createNamedQuery("Test.getAll", Test.class);
         return namedQuery.getResultList();
     }
+
+    @Override
+    public Test getTestByName(String testName) {
+        try {
+            TypedQuery<Test> namedQuery = em.createNamedQuery("Test.findTestByName", Test.class)
+                    .setParameter("name", testName);
+            return namedQuery.getSingleResult();
+        } catch (Exception e){
+            return null;
+        }
+    }
 }

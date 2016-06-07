@@ -1,38 +1,40 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: Study
-  Date: 25.05.2016
-  Time: 16:21
+  Date: 29.05.2016
+  Time: 12:54
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="http://bootstrap-3.ru/assets/ico/favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="/KnowledgeTests/resources/img/testIco.ico">
 
-    <!-- Bootstrap core CSS -->
-    <link href="http://bootstrap-3.ru/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="http://bootstrap-3.ru/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="http://bootstrap-3.ru/examples/justified-nav/justified-nav.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="http://bootstrap-3.ru/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style type="text/css"></style><style type="text/css">/*.lleo_errorSelection *::-moz-selection,
+<!-- Just for debugging purposes. Don't actually copy this line! -->
+<script src="http://bootstrap-3.ru/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+<script type="text/javascript" src="/KnowledgeTests/resources/js/jquery.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+<script type="text/javascript" src="/KnowledgeTests/resources/js/jquery-1.11.1.min.js"></script>
+<![endif]-->
+<style type="text/css"></style>
+<style type="text/css">/*.lleo_errorSelection *::-moz-selection,
 .lleo_errorSelection *::selection,
 .lleo_errorSelection *::-webkit-selection {
     background-color: red !important;
@@ -172,11 +174,11 @@
     font-size: 0 !important;
     color: #aaa !important;
     display: block !important;
-	z-index: 9999999999 !important;
-	width: 7px !important;
-	height: 7px !important;
-	padding: 0 !important;
-	margin: 0 !important;
+    z-index: 9999999999 !important;
+    width: 7px !important;
+    height: 7px !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }*/
 
 #lleo_dialog #lleo_optionsBtn {
@@ -575,33 +577,5 @@
 
 .lleo_hidden_iframe {
     visibility: hidden;
-}</style></head>
+}</style>
 
-<body>
-
-<div class="container">
-
-    <c:url value="/j_spring_security_check" var="loginUrl" />
-    <form class="form-signin" role="form" action="${loginUrl}" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input name="j_username" type="text" class="form-control" placeholder="Nick name" required="" autofocus="">
-        <input name="j_password" type="password" class="form-control" placeholder="Password" required="">
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me"> Remember me, care this don't work ;)
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
-
-    <form action="/KnowledgeTests/account/registration">
-        <button class="btn btn-lg btn-primary btn-block" id="submit" type="submit">Register</button>
-    </form>
-
-
-</div> <!-- /container -->
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-
-</body></html>

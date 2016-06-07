@@ -1,11 +1,13 @@
 package com.testing.model;
 
 
+import com.testing.model.enums.UserRoleEnum;
 import com.testing.model.helpers.TestAssociation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
@@ -25,15 +27,23 @@ public class User {
     private int id;
 
     @Column(name = "nickName", unique = true, updatable = false)
+    @NotNull
+    //@NotEmpty
     private String nick;
 
     @Column(name = "firstName")
+    @NotNull
+    //@NotEmpty
     private String firstName;
 
     @Column(name = "lastName")
+    @NotNull
+    //@NotEmpty
     private String lastName;
 
     @Column(name = "password")
+    @NotNull
+    //@NotEmpty
     private String password;
 
     @ManyToMany
@@ -47,19 +57,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<TestAssociation> tests;
 
-    public void addTest(Test test, Date date, int mark) {
-        TestAssociation association = new TestAssociation();
 
-        association.setUserId(this.getId());
-        association.setTestId(test.getId());
-        association.setMark(mark);
-        association.setPassedIn(date);
-        association.setUser(this);
-        association.setTest(test);
-
-        this.tests.add(association);
-        test.getUsers().add(association);
-    }
 
 
 
@@ -67,11 +65,14 @@ public class User {
 
     public User(){}
 
-    public User(String nick, String firstName, String lastName, String password) {
+    public User(String nick, String firstName, String lastName, String password, Group group) {
         this.nick = nick;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+
+        groups = new ArrayList<>();
+        groups.add(group);
     }
 
     public int getId() {
@@ -112,6 +113,10 @@ public class User {
 
     public List<TestAssociation> getTests() {
         return tests;
+    }
+
+    public void addTestAssociation(TestAssociation testAssociation) {
+        tests.add(testAssociation);
     }
 
     public void setTests(List<TestAssociation> tests) {

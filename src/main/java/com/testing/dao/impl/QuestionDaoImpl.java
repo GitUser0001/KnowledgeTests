@@ -5,6 +5,9 @@ import com.testing.dao.IBaseDao;
 import org.springframework.stereotype.Repository;
 
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,24 +15,33 @@ import java.util.List;
 @SessionScoped
 public class QuestionDaoImpl implements IBaseDao<Question>, Serializable {
 
+    private EntityManager em = Persistence.createEntityManagerFactory("PostgreSQL").createEntityManager();
 
     public Question add(Question item) {
-        return null;
+        em.getTransaction().begin();
+        Question questionFromDB = em.merge(item);
+        em.getTransaction().commit();
+        return questionFromDB;
     }
 
     public void delete(int id) {
-
+        em.getTransaction().begin();
+        em.remove(get(id));
+        em.getTransaction().commit();
     }
 
     public Question get(int id) {
-        return null;
+        return em.find(Question.class, id);
     }
 
     public void update(Question item) {
-
+        em.getTransaction().begin();
+        em.merge(item);
+        em.getTransaction().commit();
     }
 
     public List<Question> getAll() {
-        return null;
+        TypedQuery<Question> namedQuery = em.createNamedQuery("Question.getAll", Question.class);
+        return namedQuery.getResultList();
     }
 }
