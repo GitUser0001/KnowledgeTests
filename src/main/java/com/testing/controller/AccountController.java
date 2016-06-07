@@ -38,7 +38,7 @@ public class AccountController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/registration", method = RequestMethod.POST, produces = "application/json; charset=\"utf-8\"")
     @ResponseBody
     public String registrationForm(
                 @RequestParam(value = "nickName") String nickName,

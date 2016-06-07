@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем правила запросов
                 // по которым будет определятся доступ к ресурсам и остальным данным
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/", "/account/registration", "/account/login").permitAll()
+                .antMatchers("/resources/**", "/", "/account/registration", "/account/login", "account/signin.css").permitAll()
                 .anyRequest().authenticated()
                 .and();
 

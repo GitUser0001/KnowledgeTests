@@ -1,6 +1,7 @@
 package com.testing.model;
 
 
+import com.testing.model.enums.UserRoleEnum;
 import com.testing.model.helpers.TestAssociation;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -64,11 +65,14 @@ public class User {
 
     public User(){}
 
-    public User(String nick, String firstName, String lastName, String password) {
+    public User(String nick, String firstName, String lastName, String password, Group group) {
         this.nick = nick;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+
+        groups = new ArrayList<>();
+        groups.add(group);
     }
 
     public int getId() {

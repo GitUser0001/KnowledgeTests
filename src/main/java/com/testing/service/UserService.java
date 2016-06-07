@@ -1,7 +1,9 @@
 package com.testing.service;
 
+import com.testing.dao.impl.GroupDaoImpl;
 import com.testing.dao.impl.TestAssociationDaoImpl;
 import com.testing.dao.impl.UserDaoImpl;
+import com.testing.model.Group;
 import com.testing.model.Test;
 import com.testing.model.User;
 import com.testing.model.helpers.TestAssociation;
@@ -21,6 +23,8 @@ public class UserService {
     private UserDaoImpl userDao;
     @Autowired
     private TestAssociationDaoImpl testAssociationDao;
+    @Autowired
+    private GroupDaoImpl groupDao;
 
 
     public void addUser(User user) {
@@ -40,7 +44,10 @@ public class UserService {
         if (userDao.get(nickName) != null)
             return false;
 
-        User user = new User(nickName, firstName, lastName, pass);
+
+        Group group = groupDao.get(1001);
+
+        User user = new User(nickName, firstName, lastName, pass, group);
 
         userDao.add(user);
         return true;

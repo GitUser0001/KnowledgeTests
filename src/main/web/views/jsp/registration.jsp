@@ -579,201 +579,33 @@
     visibility: hidden;
 }</style>
 
-    <script type="text/javascript" src="/resources/js/jquery.js"></script>
+    <script type="text/javascript" src="/KnowledgeTests/resources/js/jquery.js"></script>
 
 <script>
+    var ip = window.location.href.replace('http://','').split(':')[0];
 
 
-    function createUserLast() {
-        var postData = JSON.stringify($('#registerForm').serializeArray());
-        e.preventDefault();
-        //$(location).attr('href', 'http://localhost:8080/KnowledgeTests/account/login');
-        $.ajax({
-            url : "http://localhost:8080/KnowledgeTests/account/registration",
-            type: "POST",
-            data : postData,
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success:function(data, textStatus, jqXHR)
-            {
-                //data: return data from server
-                window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                return false;
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                return false;
-            }
-        })
-                .done(function (data) {
-                    data = JSON.parse(data);
-                    window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                    if (data.success === true) {
-                        alert("OK !!!");
-                        window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                        return false;
-                    } else {
-                        alert("Error, invalid data or user with such nick name exist !!!");
-                        window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                        return false;
-                    }
-                });
-        return false;
-    }
-
-/*
     $( document ).ready(function() {
-
-        //callback handler for form submit
-        $("#submitBtn").submit(function(e) {
-            var postData = JSON.stringify($('#registerForm').serializeArray());
-            e.preventDefault();
-            $("#registerForm").action = 'http://localhost:8080/KnowledgeTests/account/login';
+        $("#submitBtn").click(function () {
+            var postData = $('#registerForm').serializeArray();
+            //$(location).attr('href', 'http://localhost:8080/KnowledgeTests/account/login');
             $.ajax({
-                        url : "http://localhost:8080/KnowledgeTests/account/registration",
-                        type: "POST",
-                        data : postData,
-                        async: false,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success:function(data, textStatus, jqXHR)
-                        {
-                            //data: return data from server
-                            $('#registerForm').action = 'http://localhost:8080/KnowledgeTests/account/login';
-                        },
-                        error: function(jqXHR, textStatus, errorThrown)
-                        {
-                            window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                        }
-                    })
-                        .done(function (data) {
-                            $('#registerForm').action = 'http://localhost:8080/KnowledgeTests/account/login';
-                            data = JSON.parse(data);
-                            window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                            if (data.success === 1) {
-                                alert("OK !!!");
-                                window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                            } else {
-                                alert("Error, invalid data or user with such nick name exist !!!");
-                                window.location.assign('http://localhost:8080/KnowledgeTests/account/login');
-                            }
-                        });
+                url : "http://"+ ip + ":8080/KnowledgeTests/account/registration",
+                type: "POST",
+                data : postData,
+                success:function(data, textStatus, jqXHR)
+                {
+                    if (data.success === true)
+                        window.location.assign("http://" + ip + ":8080/KnowledgeTests/account/login");
+                    else alert("User with this login existed");
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    alert(textStatus || errorThrown);
+                }
+            });
         });
-
-
-
     });
-
-
-
-    function createUser() {
-        var dataToSend = JSON.stringify($("#registerForm").serializeArray());
-        window.location.replace('http://localhost:8080/KnowledgeTests/account/login');
-        // AJAX START -----------------
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/KnowledgeTests/account/registration",
-            data: dataToSend,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success :
-                    function (data) {
-                        console.log("olololo");
-                        console.dir({data});
-                        alert(data);
-                        data = JSON.parse(data);
-
-                        if (data.status === true) {
-                            alert("OK !!!");
-                            location.href = 'http://localhost:8080/KnowledgeTests/account/login';
-                        } else {
-                            alert("Error, invalid data or user with such nick name exist !!!");
-                            location.href = 'http://localhost:8080/KnowledgeTests/account/login';
-                        }
-                    }
-        });
-    }
-
-
-    function createUserTest2() {
-        var dataToSend = JSON.stringify($("#registerForm").serializeArray());
-        // AJAX START -----------------
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/KnowledgeTests/account/registration",
-            data: dataToSend,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success :
-                    function (data) {
-                        console.log("olololo");
-                        console.dir({data});
-                        alert(data);
-                        data = JSON.parse(data);
-
-
-                        if (true) {
-                            var serializedForm = $("#registerForm").serialize();
-
-                            var dataToLogin = JSON.stringify({
-                                "j_username":  "Dan",
-                                "j_password":  "123"
-                            });
-
-                            $.ajax({
-                                type: "POST",
-                                url: "http://localhost:8080/KnowledgeTests/j_spring_security_check",
-                                data: {
-                                    'j_username':'Dan',
-                                    'j_password':'123'
-                                },
-                                success: function () {
-                                    location.href='http://localhost:8080/KnowledgeTests';
-                                }
-                            });
-                        } else {
-                            alert("Error, invalid data or user with such nick name exist !!!");
-
-                        }
-                    }
-        });
-    }
-
-    function createUserTest() {
-
-        // AJAX START -----------------
-
-
-
-                        if (true) {
-                            var serializedForm = $("#registerForm").serialize();
-
-                            var dataToLogin = JSON.stringify({
-                                "j_username":  "Dan",
-                                "j_password":  "123"
-                            });
-
-                            $.ajax({
-                                type: "POST",
-                                url: "http://localhost:8080/KnowledgeTests/j_spring_security_check",
-                                data: {
-                                    'j_username':'Dan',
-                                    'j_password':'123'
-                                },
-                                success: function () {
-                                    location.href='http://localhost:8080/KnowledgeTests';
-                                }
-                            });
-                        } else {
-                            alert("Error, invalid data or user with such nick name exist !!!");
-
-
-                        }
-
-    }
-*/
 </script>
 
 
@@ -797,7 +629,7 @@
         <label class="text-uppercase text-sm">Last name</label>
         <input name="lastName" type="text" class="form-control" placeholder="Last name" required="" autofocus="">
 
-        <button id="submitBtn" value="Send" class="btn btn-lg btn-primary btn-block" onclick="return createUserLast()" type="submit">Sign in</button>
+        <button id="submitBtn" value="Send" class="btn btn-lg btn-primary btn-block" type="button">Sign in</button>
     </form:form>
 
 </div> <!-- /container -->
