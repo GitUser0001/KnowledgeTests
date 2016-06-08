@@ -4,6 +4,7 @@ import com.testing.model.helpers.TestAssociation;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,7 +35,7 @@ public class Test {
     private Set<Question> questions = new HashSet<>();
 
     @OneToMany(mappedBy = "test")
-    private List<TestAssociation> users;
+    private List<TestAssociation> users = new ArrayList<>();
 
 
     public Test(){}
@@ -79,7 +80,9 @@ public class Test {
         return questions;
     }
 
-    public void addTestAssociation(TestAssociation testAssociation) { users.add(testAssociation); }
+    public void addTestAssociation(TestAssociation testAssociation) {
+        users.add(testAssociation);
+    }
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;

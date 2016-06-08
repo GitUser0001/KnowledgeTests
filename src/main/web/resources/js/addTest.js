@@ -42,8 +42,8 @@ function createOrClearQuestionForm(questionNumber) {
                         "\<button id=\"confirmBtn\"         style=\"margin: 20px\" style=\"width: 25%\"  class=\"btn btn-lg btn-success\" type=\"button\">Confirm\</button>" + 
                         "\<button id=\"nextQuestionBtn\"    style=\"margin: 20px\" style=\"width: 30%\" class=\"btn btn-lg btn-warning\" type=\"button\">Next question\</button>" +
                         "\</div>";
-    
-    
+
+    counter = 3;
     document.getElementById('divQuestionForm').appendChild(newDiv);
 }
 

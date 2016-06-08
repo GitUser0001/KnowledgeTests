@@ -84,7 +84,6 @@
                   AJAX.sendQuestion(question, function () {
                       $("#divQuestionForm").empty();
                       createOrClearQuestionForm(questionNumber);
-                      questionNumber++;
                   })
               }
           });
