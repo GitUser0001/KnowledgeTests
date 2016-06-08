@@ -294,7 +294,11 @@ public class TestController {
             return "redirect:/error";
         }
         else {
-            testService.updateTest(test);
+            Test testFromDB = testService.getById(test.getId());
+            testFromDB.setName(test.getName());
+            testFromDB.setDescription(test.getDescription());
+
+            testService.updateTest(testFromDB);
 
             return "redirect:/test/all";
         }
